@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		p.fullxml { display:none }
+	</style>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+  <body>
+	<div style="width:200px;font-size:12px;">
+		<h4><%= @output.at_xpath('//Email').inner_text %></h4>
+		<p><strong>Opt-In Date:</strong><br> 
+		<%= @output.at_xpath('//OptedIn').inner_text %></p>
+	
+		<% if (@output.at_xpath('//OptedOut').inner_text == '') %>
+	
+			<p><strong>Subscribed to:</strong></p>
+
+			<% @output.xpath('//COLUMN').each do |node| %>
+				<% if (node.xpath('VALUE').inner_text == 'Yes') %>
+					<p><%= node.xpath('NAME') %></p>
+				<% end %>
+			<% end %>
+		<% else %>
+			<p><strong>Opted Out:</strong><br> 
+			<%= @output.at_xpath('//OptedOut').inner_text %></p>
+		<% end %>
+	
+		<button class="showall">Show/hide Full XML</button>
+		<p class="fullxml"><%= @output.to_xml(:indent => 2) %></p>
+	</div>
+	
+	<script>
+		$("button.showall").toggle(
+			function () {
+				$("p.fullxml").css("display","block");
+			},
+			function () {
+				$("p.fullxml").css("display","none");
+			}
+		);
+	</script>
+  </body>
+</html>

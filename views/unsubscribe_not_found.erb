@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		p.fullxml { display:none }
+	</style>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+  <body>
+	<div style="width:200px;font-size:12px;">
+		<p><%= @output.at_xpath('//FaultString').inner_text %></p>
+		<p>Errorid: <%= @output.at_xpath('//errorid').inner_text %></p>
+		<p><a href="../unsubscribe">Go back to unsubscribe form</a></p>
+		<button class="showall">Show/hide Full XML</button>
+		<p class="fullxml"><%= @output.to_xml(:indent => 2) %></p>
+	</div>
+	
+	<script>
+		$("button.showall").toggle(
+			function () {
+				$("p.fullxml").css("display","block");
+			},
+			function () {
+				$("p.fullxml").css("display","none");
+			}
+		);
+	</script>
+  </body>
+</html>
