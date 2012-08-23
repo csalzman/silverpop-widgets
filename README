@@ -1,0 +1,5 @@
+Silverpop Widgets
+
+Need to be able to unsubscribe or look up information on a Silverpop user? Don't want to login to Silverpop? Well, this small Sinatra app get you most of the way there.
+
+Written primarily to be used as a widget in Zendesk. Perhaps you'll find it useful in other scenarios. 
